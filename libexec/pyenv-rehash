@@ -109,6 +109,12 @@ list_executable_names() {
       echo "${file##*/}"
     done
   done
+  pyenv-versions --bare --skip-aliases | \
+  while read -r version; do
+    for file in "${PYENV_GLOBAL_ROOT}/versions/${version}/bin/"*; do
+      echo "${file##*/}"
+    done
+  done
 }
 
 # The basename of each argument passed to `make_shims` will be

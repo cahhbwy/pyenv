@@ -30,6 +30,7 @@ if [ "$1" = "--complete" ]; then
 fi
 
 versions=("$@")
+versions=${versions##*:}
 
 if [ "$versions" = "--unset" ]; then
   rm -f .python-version

@@ -18,7 +18,7 @@ fi
 if [ -n "$1" ]; then
   OLDIFS="$IFS"
   { IFS=:
-    export PYENV_VERSION="$*"
+    export PYENV_VERSION="${*##*:}"
   }
   IFS="$OLDIFS"
 elif [ -z "$PYENV_VERSION" ]; then
@@ -39,6 +39,9 @@ OLDIFS="$IFS"
       fi
     else
       PYENV_PREFIX_PATH="${PYENV_ROOT}/versions/${version}"
+      if [ ! -d "$PYENV_PREFIX_PATH" ]; then
+        PYENV_PREFIX_PATH="${PYENV_GLOBAL_ROOT}/versions/${version}"
+      fi
     fi
     if [ -d "$PYENV_PREFIX_PATH" ]; then
       PYENV_PREFIX_PATHS=("${PYENV_PREFIX_PATHS[@]}" "$PYENV_PREFIX_PATH")

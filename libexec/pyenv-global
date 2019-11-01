@@ -22,6 +22,7 @@ if [ "$1" = "--complete" ]; then
 fi
 
 versions=("$@")
+versions=${versions##*:}
 PYENV_VERSION_FILE="${PYENV_ROOT}/version"
 
 if [ -n "$versions" ]; then

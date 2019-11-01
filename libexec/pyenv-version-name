@@ -22,7 +22,7 @@ fi
 
 version_exists() {
   local version="$1"
-  [ -d "${PYENV_ROOT}/versions/${version}" ]
+  [ -d "${PYENV_ROOT}/versions/${version}" -o -d "${PYENV_GLOBAL_ROOT}/versions/${version}" ]
 }
 
 versions=()
