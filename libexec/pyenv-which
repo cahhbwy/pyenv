@@ -43,7 +43,7 @@ for version in "${versions[@]}"; do
     PATH="$(remove_from_path "${PYENV_ROOT}/shims")"
     PYENV_COMMAND_PATH="$(command -v "$PYENV_COMMAND" || true)"
   else
-    if [ -d "${PYENV_ROOT}/versions/${version}" ]; then
+    if [ -x "${PYENV_ROOT}/versions/${version}/bin/${PYENV_COMMAND}" ]; then
       PYENV_COMMAND_PATH="${PYENV_ROOT}/versions/${version}/bin/${PYENV_COMMAND}"
     else
       PYENV_COMMAND_PATH="${PYENV_GLOBAL_ROOT}/versions/${version}/bin/${PYENV_COMMAND}"
@@ -69,7 +69,7 @@ else
     if [ "$version" = "system" ]; then
       continue
     fi
-    if ! [ -d "${PYENV_ROOT}/versions/${version}" -o -d "${PYENV_GLOBAL_ROOT}/versions/${version}" ]; then
+    if ! [ -x "${PYENV_ROOT}/versions/${version}/bin/python" -o -x "${PYENV_GLOBAL_ROOT}/versions/${version}/bin/python" ]; then
       echo "pyenv: version \`$version' is not installed (set by $(pyenv-version-origin))" >&2
       any_not_installed=1
     fi
