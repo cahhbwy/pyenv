@@ -171,6 +171,77 @@ If you're on macOS, consider [installing with Homebrew](#homebrew-on-macos).
 
 If you're on Windows, consider using @kirankotari's [`pyenv-win`](https://github.com/pyenv-win/pyenv-win) fork. (`pyenv` does not work on windows outside the Windows Subsystem for Linux)
 
+### 系统范围下的安装
+
+假设pyenv安装到/opt下，使用的shell是bash，root需要安装的python版本是3.6.8，用户需要安装的python版本是3.7.4，需要安装的库是numpy
+
+#### 安装pyenv
+
+以root用户运行
+
+```bash
+cd /opt
+git clone https://github.com/cahhbwy/pyenv.git
+cd /opt/pyenv
+git checkout system-wide
+cd /opt/pyenv/plugins
+git clone https://github.com/pyenv/pyenv-virtualenv.git
+git clone https://github.com/yyuu/pyenv-pip-rehash.git
+git clone git://github.com/pyenv/pyenv-doctor.git
+git clone https://github.com/pyenv/pyenv-which-ext.git
+git clone https://github.com/s1341/pyenv-alias.git
+git clone https://github.com/jawshooah/pyenv-default-packages.git
+git clone https://github.com/massongit/pyenv-pip-update
+```
+
+添加下述内容到root的.bashrc文件末尾
+
+```bash
+export PYENV_ROOT="/opt/pyenv"
+export PYENV_GLOBAL_ROOT="/opt/pyenv"
+export PATH="$PYENV_GLOBAL_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+```
+
+#### 普通用户配置pyenv
+
+添加下述内容到自己的.bashrc文件末尾
+```bash
+export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_GLOBAL_ROOT="/opt/pyenv"
+export PATH="$PYENV_GLOBAL_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+```
+
+#### root安装python 3.6.8及numpy库
+
+以root用户运行
+
+```bash
+pyenv install 3.6.8
+pyenv global root:3.6.8
+pip install numpy
+```
+
+#### 普通用户安装python 3.7.4及numpy库
+
+以当前用户运行
+
+```bash
+pyenv install 3.7.4
+pyenv global user:3.7.4
+pip install numpy
+```
+
+#### 普通用户以root的python 3.7.4为基础，创建虚拟环境并激活，注意：创建的虚拟环境中只有pip、setuptools库
+```bash
+pyenv global root:3.7.4
+pyenv virtualenv my3.7.5
+pyenv activate my3.7.5
+```
+
 ### The automatic installer
 
 Visit my other project:
