@@ -241,12 +241,30 @@ pyenv global my3.7.5
 
 #### 普通用户安装指定版本的python并使用（推荐对python版本有特殊需求时使用，可安装anaconda(编译安装，速度较慢)）
 
-```bash
+a. 安装普通版本python
+
+```shell
 export CFLAGS='-O2'
 pyenv install 3.7.4
 pyenv global user:3.7.4
 ```
 
+b. 安装anaconda
+
+```shell
+export CFLAGS='-O2'
+pyenv install anaconda3-5.3.1
+pyenv global user:anaconda3-5.3.1
+```
+
+#### 其他说明
+
+Tab补全可看到很多信息。
+```shell
+pyenv versions  # 查看可用的版本
+pyenv install --list  # 可查看能够安装的python版本
+pyenv which python  # 查看python路径
+```
 
 ### The automatic installer
 
