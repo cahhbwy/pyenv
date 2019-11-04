@@ -204,7 +204,17 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 ```
 
-#### 普通用户配置pyenv
+#### root安装python 3.6.8及numpy库
+
+以root用户运行
+
+```bash
+pyenv install 3.6.9
+pyenv global root:3.6.9
+pip install numpy
+```
+
+### 普通用户配置pyenv
 
 添加下述内容到自己的.bashrc文件末尾
 ```bash
@@ -215,32 +225,28 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 ```
 
-#### root安装python 3.6.8及numpy库
-
-以root用户运行
+#### 普通用户直接使用已经由root安装好的python 3.7.5 (不推荐使用，因为无法安装其他库）
 
 ```bash
-pyenv install 3.6.8
-pyenv global root:3.6.8
-pip install numpy
+pyenv global root:3.7.5
 ```
 
-#### 普通用户安装python 3.7.4及numpy库
-
-以当前用户运行
+#### 普通用户基于已经安装的python创建自己的虚拟环境（推荐使用）
 
 ```bash
+pyenv global root:3.7.5
+pyenv virtualenv my3.7.5
+pyenv global my3.7.5
+```
+
+#### 普通用户安装指定版本的python并使用（推荐对python版本有特殊需求时使用，可安装anaconda(编译安装，速度较慢)）
+
+```bash
+export CFLAGS='-O2'
 pyenv install 3.7.4
 pyenv global user:3.7.4
-pip install numpy
 ```
 
-#### 普通用户以root的python 3.7.4为基础，创建虚拟环境并激活，注意：创建的虚拟环境中只有pip、setuptools库
-```bash
-pyenv global root:3.7.4
-pyenv virtualenv my3.7.5
-pyenv activate my3.7.5
-```
 
 ### The automatic installer
 
