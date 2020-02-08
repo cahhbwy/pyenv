@@ -167,6 +167,7 @@ remove_outdated_shims
 # shellcheck disable=SC2046
 make_shims $(list_executable_names | sort -u)
 
+
 # Allow plugins to register shims.
 OLDIFS="$IFS"
 IFS=$'\n' scripts=(`pyenv-hooks rehash`)
